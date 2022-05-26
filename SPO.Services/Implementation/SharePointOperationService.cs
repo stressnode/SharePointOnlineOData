@@ -93,11 +93,11 @@ namespace SPO.Services
 		public List<SPOObject> GetFolderContents(string relativePath)
 		{
 			var response = this.SharePointRequestService.RequestSharePointOnline
-					(
-						HttpMethod.Get,
-						this.AppSettingService.SharePointSiteCollection,
-						$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/files?$select=Name,Exists,Title,TimeCreated,ServerRelativeUrl,ItemCount,UniqueId"
-					);
+								(
+									HttpMethod.Get,
+									this.AppSettingService.SharePointSiteCollection,
+									$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/files?$select=Name,Exists,Title,TimeCreated,ServerRelativeUrl,ItemCount,UniqueId"
+								);
 
 			return this.SharePointRequestService.ResponseToListofObject<SPOObject>(response.GetResponseStream(), "results");
 
@@ -106,11 +106,11 @@ namespace SPO.Services
 		public List<SPOObject> GetFolders(string relativePath)
 		{
 			var response = this.SharePointRequestService.RequestSharePointOnline
-					(
-						HttpMethod.Get,
-						this.AppSettingService.SharePointSiteCollection,
-						$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/folders?$select=Name,Exists,Title,TimeCreated,ServerRelativeUrl,ItemCount,UniqueId"
-					);
+							(
+								HttpMethod.Get,
+								this.AppSettingService.SharePointSiteCollection,
+								$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/folders?$select=Name,Exists,Title,TimeCreated,ServerRelativeUrl,ItemCount,UniqueId"
+							);
 
 			return this.SharePointRequestService.ResponseToListofObject<SPOObject>(response.GetResponseStream(), "results");
 		}
