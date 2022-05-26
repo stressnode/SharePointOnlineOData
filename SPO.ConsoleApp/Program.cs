@@ -22,7 +22,7 @@ namespace SPO.ConsoleApp
 			#endregion
 
 			operations.GetAccessToken();
-			var items = operations.GetFolderContents("Property Documents/49813/Relocation");
+			var items = operations.GetFolderContents("path/to/getFiles");
 
 			foreach(var item in items)
 			{
@@ -31,7 +31,7 @@ namespace SPO.ConsoleApp
 				Console.WriteLine();
 			}
 
-			items = operations.GetFolders("Property Documents/49204");
+			items = operations.GetFolders("path/to/getFolders");
 
 			foreach (var item in items)
 			{
