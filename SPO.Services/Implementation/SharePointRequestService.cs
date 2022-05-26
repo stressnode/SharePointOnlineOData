@@ -41,13 +41,12 @@ namespace SPO.Services
 
 				WebRequest webRequest;
 				var accessTokenUrl = string.Format(this.AppSettingService.AccessTokenUrl, this.AppSettingService.Tenant);
+				var postData = BuildStringContent();
+				var data = Encoding.ASCII.GetBytes(postData);
 
 				webRequest = WebRequest.Create(accessTokenUrl);
 				webRequest.ContentType = "application/x-www-form-urlencoded";
 				webRequest.Method = "POST";
-
-				var postData = BuildStringContent();
-				var data = Encoding.ASCII.GetBytes(postData);
 
 				using (var stream = webRequest.GetRequestStream())
 				{
@@ -70,9 +69,9 @@ namespace SPO.Services
 			else
 			{
 				this.AppSettingService.AccessToken = this.CacheHelper.GetValue("access_token") as string;
-
 				Console.WriteLine("Token requested from cache");
 			}
+
 			return this.AppSettingService.AccessToken;
 		}
 
@@ -168,6 +167,7 @@ namespace SPO.Services
 		{
 			var type = new { type = "SP.Folder" };
 			var request = new { __metadata = type, ServerRelativeUrl = folderPath };
+
 			return request;
 		}
 

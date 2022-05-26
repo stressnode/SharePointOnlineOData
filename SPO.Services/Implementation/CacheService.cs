@@ -10,7 +10,6 @@ namespace SPO.Services
 		public bool Add(string cacheKey, object value, int cacheExpirationHours = 24)
 		{
 			var absExpiration = new DateTimeOffset(DateTime.Now.AddHours(cacheExpirationHours));
-
 			var memoryCache = MemoryCache.Default;
 
 			return memoryCache.Add(cacheKey.ToString(), value, absExpiration);
