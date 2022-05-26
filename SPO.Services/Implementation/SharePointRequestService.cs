@@ -20,6 +20,7 @@ namespace SPO.Services
 			this.AppSettingService = appSettingService;
 			this.CacheHelper = cacheService;
 		}
+
 		public ContextWebInfo GetXRequestDigest(HttpMethod method, string siteUrl)
 		{
 			HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/contextinfo");
@@ -32,6 +33,7 @@ namespace SPO.Services
 
 			return ResponseToObject<ContextWebInfo>(endpointResponse.GetResponseStream(), "GetContextWebInformation");
 		}
+
 		public string GetSPOAccessToken()
 		{
 			this.AppSettingService.AccessToken = "";
