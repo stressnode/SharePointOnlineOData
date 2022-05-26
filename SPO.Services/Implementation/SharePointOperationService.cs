@@ -17,7 +17,7 @@ namespace SPO.Services
 			this.AppSettingService = appSettingService;
 		}
 
-		public void CreateFile(string relativePath, string fileSourcePath)
+		public void CreateFile(string relativeFileDestinaitonPath, string fileSourcePath)
 		{
 			var file = new FileInfo(fileSourcePath);
 			byte[] fileBytes = File.ReadAllBytes(fileSourcePath);
@@ -25,7 +25,7 @@ namespace SPO.Services
 			this.SharePointRequestService.RequestSharePointOnlineFileCreate
 				(
 					this.AppSettingService.SharePointSiteCollection,
-					$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/Files/add(url='{file.Name}',overwrite=true)"
+					$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativeFileDestinaitonPath}')/Files/add(url='{file.Name}',overwrite=true)"
 					, fileBytes
 				);
 		}
@@ -47,6 +47,16 @@ namespace SPO.Services
 			}
 		}
 
+		public void DeleteFile(string relativeFilePath)
+		{
+			this.SharePointRequestService.RequestSharePointOnline
+				(
+					HttpMethod.Delete,
+					this.AppSettingService.SharePointSiteCollection,
+					$"GetFileByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativeFilePath}')"
+				);
+		}
+
 		public void CreateFolder(string relativePath, string newFolderName)
 		{
 			var payload = JsonConvert.SerializeObject(this.SharePointRequestService.CreateFolderPayload(newFolderName));
@@ -56,6 +66,16 @@ namespace SPO.Services
 					this.AppSettingService.SharePointSiteCollection,
 					$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')/folders"
 					, payload
+				);
+		}
+
+		public void DeleteFolder(string relativePath)
+		{
+			this.SharePointRequestService.RequestSharePointOnline
+				(
+					HttpMethod.Delete,
+					this.AppSettingService.SharePointSiteCollection,
+					$"GetFolderByServerRelativeUrl('{this.AppSettingService.SharePointSiteCollection}/{relativePath}')"
 				);
 		}
 
