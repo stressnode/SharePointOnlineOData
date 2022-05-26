@@ -75,11 +75,11 @@ namespace SPO.Services
 			return this.AppSettingService.AccessToken;
 		}
 
-		public HttpWebResponse RequestSharePointOnline(HttpMethod method, string siteUrl, string url, string payload = null)
+		public HttpWebResponse RequestSharePointOnline(HttpMethod method, string siteUrl, string odataQuery, string payload = null)
 		{
 			try
 			{
-				HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{url}");
+				HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{odataQuery}");
 
 				endpointRequest.Method = method.Method;
 				endpointRequest.Accept = "application/json;odata=verbose";
@@ -107,9 +107,9 @@ namespace SPO.Services
 			}
 		}
 
-		public HttpWebResponse RequestSharePointOnlineFileCreate(string siteUrl, string url, byte[] file)
+		public HttpWebResponse RequestSharePointOnlineFileCreate(string siteUrl, string odataQuery, byte[] file)
 		{
-			HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{url}");
+			HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{odataQuery}");
 
 			endpointRequest.Method = HttpMethod.Post.Method;
 			endpointRequest.Headers.Add("binaryStringRequestBody", "true");
@@ -121,9 +121,9 @@ namespace SPO.Services
 			return endpointresponse;
 		}
 
-		public HttpWebResponse RequestSharePointOnlineFileRead(string siteUrl, string url)
+		public HttpWebResponse RequestSharePointOnlineFileRead(string siteUrl, string odataQuery)
 		{
-			HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{url}");
+			HttpWebRequest endpointRequest = (HttpWebRequest)HttpWebRequest.Create(this.AppSettingService.SharePointBaseUrl + $"{siteUrl}/_api/web/{odataQuery}");
 
 			endpointRequest.Method = HttpMethod.Get.Method;
 			endpointRequest.Headers.Add("Authorization", "Bearer " + this.AppSettingService.AccessToken);

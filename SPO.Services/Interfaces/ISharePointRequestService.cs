@@ -9,9 +9,9 @@ namespace SPO.Services
 	public interface ISharePointRequestService
 	{
 		ContextWebInfo GetXRequestDigest(HttpMethod method, string siteUrl);
-		HttpWebResponse RequestSharePointOnlineFileRead(string siteUrl, string url);
-		HttpWebResponse RequestSharePointOnlineFileCreate(string siteUrl, string url, byte[] file);
-		HttpWebResponse RequestSharePointOnline(HttpMethod method, string siteUrl, string url, string payload = null);
+		HttpWebResponse RequestSharePointOnlineFileRead(string siteUrl, string odataQuery);
+		HttpWebResponse RequestSharePointOnlineFileCreate(string siteUrl, string odataQuery, byte[] file);
+		HttpWebResponse RequestSharePointOnline(HttpMethod method, string siteUrl, string odataQuery, string payload = null);
 		string GetSPOAccessToken();
 		List<T> ResponseToListofObject<T>(Stream response, string path);
 		T ResponseToObject<T>(Stream response, string path);
