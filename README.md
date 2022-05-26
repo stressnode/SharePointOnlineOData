@@ -1,8 +1,11 @@
 # SharePointOnlineOData
 
 I'm trying to use SharePoint Online OData REST API to perform Create/Delete/Read operations without using CSOM package.
+This is using Azure AAD to get bearer token.
 
-KB Documentation:
+**All Functionality included**
+
+###### KB Documentation:
 
 1. https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/get-to-know-the-sharepoint-rest-service?tabs=http
 2. https://docs.microsoft.com/en-us/sharepoint/dev/sp-add-ins/complete-basic-operations-using-sharepoint-rest-endpoints
