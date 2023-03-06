@@ -1,4 +1,4 @@
-## SharePointOnlineOData
+## SharePoint Online Using oData
 
 Use SharePoint Online OData REST APIs to perform Create/Delete/Read operations without using CSOM package.
 This is using Azure AAD to get bearer token.
